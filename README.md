@@ -1,18 +1,16 @@
 # Drash
 
-Drash is a nifty Command-Line Interface application which is a better
-alternative to the Linux `rm` command. It records the original path of the
-removed file, and puts it into a directory, making it easy to recovery
-them later if you accidentally deleted the wrong file.
+Drash is a Command Line Interface (CLI) application that serves as a better alternative to the Linux `rm` command. It records the original path of the removed file, and puts the deleted file into a temp directory (`~/.local/share/Drash`), making it easy to recovery later if you accidentally deleted the wrong file.
 
 This same functionality is used by KDE, GNOME, and XFCE [freedesktop-trashcan](https://www.freedesktop.org/wiki/Specifications/trash-spec/).
 
 ## Why?
 
-I was inspired by [trash-cli](https://github.com/andreafrancia/trash-cli), but
-I wanted to create something with more features that I would use. Drash aims to
-enhance the *trash-cli* experience with additional features like file searching
-and advance recovery capabilities.
+I wanted the experience using
+[trash-cli](https://github.com/andreafrancia/trash-cli), but with more
+features. Like being able to search files in the drashcan and recovering them.
+Put files into the drashcan by searching for them in the current working
+directory.
 
 ## Installation:
 
@@ -21,7 +19,7 @@ Clone the repo into your local machine:
 git clone https://github.com/hamza12700/drash
 ```
 
-Use [Cargo](https://doc.rust-lang.org/cargo/) to build and install the binary.
+Use [Cargo](https://doc.rust-lang.org/cargo/) to  build and install the binary into your `$PATH`.
 ```bsah
 cd drash
 cargo install --path .
@@ -31,17 +29,17 @@ cargo install --path .
 
 ### Drash files
 
-Put file(s) into drashcan:
+Put a file into the drashcan:
 ```
 drash foo
 ```
 
-Pass `--force/-f` flag to delete a file permanently:
+Pass `--force/-f` flag to delete a file without storing it in the drashcan:
 ```
 drash foo -f
 ```
 
-Pass no arguments and options to remove multiple files in current directory:
+Pass no arguments and options to put files into drashcan by search for them:
 ```
 drash
 ```
@@ -50,29 +48,29 @@ drash
 
 #### List
 
-List all the removed files:
+List files in the drashcan:
 ```
 drash list
 ```
 
 #### Restore
 
-Restore files by searching for them:
+Restore a file from drashcan using indices, also supports range and comma separated values:
 ```
 drash restore
 ```
 
-Restore the last removed file:
+Restore the last drashed file:
 ```
 drash restore -
 ```
 
-Restore a file matching the file name:
+Restore a file using fuzzy searching:
 ```
 drash restore <FILE_NAME>
 ```
 
-Pass `--overwrite/-o` flag to overwrite the existing file:
+Pass `--overwrite/-o` flag to overwrite the existing file that same path:
 ```
 drash restore <FILE_NAME> --overwrite
 ```
